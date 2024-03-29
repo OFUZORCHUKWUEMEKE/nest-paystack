@@ -14,7 +14,6 @@ export class Wallet extends Document {
 
     @Prop({ default: 'NGN' })
     currency: string
-    
 }
 
 export const WalletSchema = SchemaFactory.createForClass(Wallet)
