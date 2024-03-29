@@ -1,7 +1,8 @@
 # compiled output
 /dist
 /node_modules
-
+/config
+config.ts
 # Logs
 logs
 *.log
