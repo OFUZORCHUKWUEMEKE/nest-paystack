@@ -10,8 +10,10 @@ import { ICustomerResponse } from './customer.interface';
 
 @Injectable()
 export class CustomersService {
-    constructor(private readonly customerFactory: CustomerFactory, private readonly repository: CustomerRepository, @InjectModel(Customer.name) private readonly model: Model<Customer>, private readonly wallet: WalletsService) { }
-    async CreateCustomer(customer: CustomerDto): Promise<ICustomerResponse> {
+    constructor(private readonly customerFactory: CustomerFactory, private readonly repository: CustomerRepository, @InjectModel(Customer.name) private readonly model: Model<Customer>,
+     private readonly wallet: WalletsService
+     ) {}
+    async CreateCustomer(customer: CustomerDto) {
         const factory = await this.customerFactory.create(customer)
         const newCustomer = await this.model.create(factory)
         const newWallet = await this.wallet.createWallet(newCustomer._id)
@@ -20,6 +22,7 @@ export class CustomersService {
             customer: newCustomer,
             wallet: newWallet
         }
-
     }
+
+
 }
