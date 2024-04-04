@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import { CustomerType } from "./enum/enum";
 
+export type CustomerDocument = Customer & Document
 
 @Schema({ timestamps: true })
 export class Customer extends Document {
@@ -22,7 +23,7 @@ export class Customer extends Document {
     @Prop({})
     token: string
 
-    @Prop({})
+    @Prop({ default: true })
     is_active: boolean
 
     @Prop({ enum: CustomerType, default: CustomerType.REGULAR })
