@@ -26,4 +26,18 @@ export class CustomerDto {
     @IsString()
     @MinLength(8)
     password: string
+
+    phonenumber:string
+}
+
+export class PaystackCustomer {
+    firstname: string
+
+    lastname: string
+
+    email: string
+
+    phonenumber: string
+
+    date_of_birth: Date
 }

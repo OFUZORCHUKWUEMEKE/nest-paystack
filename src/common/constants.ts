@@ -1,0 +1,1 @@
+const PAYSTACK_CREATE_CUSTOMER = "https://api.paystack.co/customer"

@@ -6,11 +6,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Customer, CustomerSchema } from './customer.model';
 import { CustomerRepository } from './customer.repository';
 import { WalletsModule } from 'src/wallets/wallets.module';
+import { PaystackModule } from 'src/paystack/paystack.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }]),WalletsModule],
+  imports: [MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }]), WalletsModule, PaystackModule],
   controllers: [CustomersController],
   providers: [CustomersService, CustomerFactory, CustomerRepository],
   exports: [CustomerFactory, CustomerRepository]
 })
-export class CustomersModule{}
+export class CustomersModule { }

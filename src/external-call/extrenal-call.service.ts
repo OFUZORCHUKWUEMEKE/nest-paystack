@@ -47,7 +47,7 @@ export class ExternalCall {
             result = response.data
             console.log('response>>', result)
         } catch (error) {
-            console.log('error >>', error.response)
+            console.log('error >>', error.response) 
             err = error.response
         }
         return { result, err }
