@@ -27,15 +27,11 @@ export class CustomersService {
         }
         const {result,err} = await this.paystackSevice.createCustomer(payload)
         
-        if (err) return new BadRequestException("Pasystack Problem")
+        if (err) return new BadRequestException("An error occured here")
         return {
             success: true,
             customer: newCustomer,
             wallet: newWallet
         }
-
-
     }
-
-
 }
