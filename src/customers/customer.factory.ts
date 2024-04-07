@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CustomerDto } from "./enum/customer.dto";
-import { HashPassword } from "src/utils/utils";
+import { HashPassword, generateToken } from "src/utils/utils";
 
 
 
@@ -8,9 +8,11 @@ import { HashPassword } from "src/utils/utils";
 export class CustomerFactory {
     async create(customer: CustomerDto) {
         const hashpassword = await HashPassword(customer.password)
+        const token =  generateToken(15)
         return {
             ...customer,
-            password: hashpassword
+            password: hashpassword,
+            token
         }
     }
 }

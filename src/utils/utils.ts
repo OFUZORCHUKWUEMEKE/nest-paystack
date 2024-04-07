@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt'
-function generateToken(length: number): string {
+export function generateToken(length: number): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     const charactersLength = characters.length;
@@ -14,3 +14,4 @@ export const HashPassword = async (password: string) => {
     const hash = await bcrypt.hash(password, salt)
     return hash
 }
+

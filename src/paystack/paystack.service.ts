@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { PAYSTACK_CREATE_CUSTOMER } from 'src/common/constants';
 import { PaystackCustomer } from 'src/customers/enum/customer.dto';
 import { ExternalCall } from 'src/external-call/extrenal-call.service';
 
@@ -19,7 +20,11 @@ export class PaystackService {
 
         }
         const { result, err } = await this.apis.postData(PAYSTACK_CREATE_CUSTOMER, payload, { Authorization: `Bearer ${this.configService.get('PAYSTACK_SECRET_KEY')}` })
-        if (err) throw new BadRequestException(err.data ? err.data.message : err)
+        console.log(err)
+        if (err) {
+            console.log(err)
+            throw new BadRequestException(err.data ? err.data.message : err)
+        }
         return {
             result,
             err

@@ -28,6 +28,12 @@ export class Customer extends Document {
 
     @Prop({ enum: CustomerType, default: CustomerType.REGULAR })
     role: CustomerType
+
+    @Prop({ default: false })
+    twofa: boolean
+
+    @Prop({default:false})
+    blacklisted:boolean
 }
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer)

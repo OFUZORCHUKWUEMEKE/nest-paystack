@@ -1,0 +1,7 @@
+http://localhost:4000
+
+POST http://localhost:4000/customer
+Content-Type: "application/json"
+{
+   "firstname":""
+}

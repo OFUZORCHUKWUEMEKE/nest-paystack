@@ -12,6 +12,6 @@ import { PaystackModule } from 'src/paystack/paystack.module';
   imports: [MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }]), WalletsModule, PaystackModule],
   controllers: [CustomersController],
   providers: [CustomersService, CustomerFactory, CustomerRepository],
-  exports: [CustomerFactory, CustomerRepository]
+  exports: [CustomerFactory, CustomerRepository,CustomersService]
 })
 export class CustomersModule { }
