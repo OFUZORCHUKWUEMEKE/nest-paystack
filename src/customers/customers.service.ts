@@ -13,7 +13,7 @@ import { PaystackService } from 'src/paystack/paystack.service';
 export class CustomersService {
     constructor(private readonly customerFactory: CustomerFactory, private readonly repository: CustomerRepository, @InjectModel(Customer.name) private readonly model: Model<Customer>,
         private readonly wallet: WalletsService, private readonly paystackSevice: PaystackService
-    ) { }
+    ) {}
     async CreateCustomer(customer: CustomerDto) {
         const factory = await this.customerFactory.create(customer)
         const newCustomer = await this.model.create(factory)
