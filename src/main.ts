@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ExceptionsLoggerFilter } from './common/exceptions/bases';
 import { HttpExceptionFilter } from './common/exceptions/exception';
 import { ModelExceptionFilter } from './common/filters/exceptions/model-exception.filter';
+import * as cookieParser from 'cookie-parser';
 // import config from './config/config';
 
 async function bootstrap() {
@@ -11,6 +12,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT);
 
   // const { httpAdapter } = app.get(HttpAdapterHost);
+  app.use(cookieParser())
 
   app.useGlobalFilters(new HttpExceptionFilter(), new ModelExceptionFilter());
 

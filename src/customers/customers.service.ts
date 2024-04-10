@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { CustomerDto, PaystackCustomer } from './enum/customer.dto';
 import { CustomerFactory } from './customer.factory';
 import { CustomerRepository } from './customer.repository';
@@ -31,7 +31,7 @@ export class CustomersService {
             if (err) {
                 console.log(err)
                 throw new BadRequestException("An error occured here")
-            } 
+            }
             return {
                 success: true,
                 customer: newCustomer,
@@ -41,5 +41,18 @@ export class CustomersService {
             throw new BadRequestException(error)
         }
 
+    }
+
+    async getEmail(email) {
+        try {
+            const customer = await this.repository.findOne({ email })
+            if (!customer) throw new ConflictException("Customer Does not exist")
+            return {
+                success: true,
+                customer
+            }
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
     }
 }

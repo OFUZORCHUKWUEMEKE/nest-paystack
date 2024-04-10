@@ -11,6 +11,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PaystackModule } from './paystack/paystack.module';
 import configuration from './config/config';
+import Joi from 'joi';
+import { JwtModule } from '@nestjs/jwt';
 
 const config = configuration()
 
@@ -19,7 +21,11 @@ const config = configuration()
   imports: [CustomersModule, WalletsModule, AuthModule, TransactionsModule, PaymentsModule, ConfigModule.forRoot({
     isGlobal: true,
     envFilePath: '.env',
-    load: [configuration]
+    load: [configuration],
+    // validationSchema: Joi.object({
+    //   JWT_SECRET: Joi.string().required(),
+    //   JWT_EXPIRATION_TIME: Joi.string().required(),
+    // })
   }), MongooseModule.forRootAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
@@ -30,6 +36,16 @@ const config = configuration()
         retryAttempts: 6,
       }
     }
+  }), JwtModule.registerAsync({
+    imports: [ConfigModule],
+    inject: [ConfigService],
+    useFactory: async (configService: ConfigService) => ({
+      secret: configService.get('JWT_SECRET'),
+      signOptions: {
+        expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}`
+      }
+    }),
+    global: true
   }), PaystackModule],
   controllers: [AppController, TransactionsController],
   providers: [AppService],
