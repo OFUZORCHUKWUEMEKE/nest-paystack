@@ -17,10 +17,6 @@ export class CustomerDto {
     @IsNotEmpty()
     email: string
 
-    @IsNotEmpty()
-    @IsString()
-    token: string
-
     @ApiProperty({ description: "The Customers Password" })
     @IsNotEmpty()
     @IsString()
