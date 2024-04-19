@@ -55,4 +55,11 @@ export class CustomersService {
             throw new BadRequestException(error)
         }
     }
+
+    async setTwoFactorAuthenticationSecret(secret: string, userId: number) {
+        // return this.model.update(userId, {
+        //     twoFactorAuthenticationSecret: secret
+        // });
+        return this.model.updateOne({_id:userId},{twoFactorAuthenticationSecret:secret})
+    }
 }

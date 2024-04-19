@@ -6,10 +6,11 @@ import { AuthService } from './auth.service';
 import { LocalAuthenticationGuard } from './guard/localAuthentication.guard';
 import { Response } from 'express';
 import JwtAuthenticationGuard from './guard/jwtAuthentication.guard';
+import { TwoFactorAuthenticationService } from './strategies/twoFactorAuthentication.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService) { }
+    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService,private readonly _twoFa:TwoFactorAuthenticationService) { }
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/signup")
@@ -52,4 +53,13 @@ export class AuthController {
         user.password = undefined;
         return user;
     }
+
+    @Post('2fa/generate')
+    @UseGuards(JwtAuthenticationGuard)
+    async generate(@Res() response:Response , @Req() req){
+        const { otpauthUrl } = await this._twoFa.generateTwoFactorAuthenticationSecret(req.user)
+
+        return this._twoFa.pipeQrCodeStream(response,otpauthUrl)
+    }
+
 }

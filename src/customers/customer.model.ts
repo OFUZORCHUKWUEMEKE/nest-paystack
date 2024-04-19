@@ -30,7 +30,7 @@ export class Customer extends Document {
     role: CustomerType
 
     @Prop({ default: false })
-    twofa: boolean
+    public twoFactorAuthenticationSecret?: string;
 
     @Prop({default:false})
     blacklisted:boolean
