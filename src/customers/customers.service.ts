@@ -57,7 +57,7 @@ export class CustomersService {
     }
 
     async setTwoFactorAuthenticationSecret(secret: string, userId: number) {
-        // return this.model.update(userId, {
+        // return this.model.update(userId, {npm 
         //     twoFactorAuthenticationSecret: secret
         // });
         return this.model.updateOne({_id:userId},{twoFactorAuthenticationSecret:secret})

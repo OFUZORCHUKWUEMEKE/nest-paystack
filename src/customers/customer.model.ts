@@ -30,10 +30,13 @@ export class Customer extends Document {
     role: CustomerType
 
     @Prop({ default: false })
-    public twoFactorAuthenticationSecret?: string;
+    twofa: boolean
 
-    @Prop({default:false})
-    blacklisted:boolean
+    @Prop({ type: String })
+    twoFactorAuthenticationSecret?: string;
+
+    @Prop({ default: false })
+    blacklisted: boolean
 }
 
 export const CustomerSchema = SchemaFactory.createForClass(Customer)

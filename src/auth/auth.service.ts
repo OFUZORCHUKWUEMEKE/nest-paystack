@@ -9,7 +9,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly customerService: CustomersService, private readonly customerRepository: CustomerRepository, private readonly jwtService: JwtService, private readonly configService: ConfigService) { }
+    constructor(private readonly customerService: CustomersService, private readonly customerRepository: CustomerRepository, private readonly jwtService: JwtService, private readonly configService: ConfigService) {}
     async getAuthenticated(email, password) {
         let newpassword = password
         try {
@@ -24,7 +24,6 @@ export class AuthService {
         }
     }
 
-
     public async getCookieWithJwtToken(customerId: number) {
         const customer = await this.customerRepository.findOne({ _id: customerId })
         if (!customer) throw new HttpException("Invalid Customer Id", HttpStatus.BAD_REQUEST)
@@ -35,7 +34,7 @@ export class AuthService {
         return `Authentication=${token}; HttpOnly; , Path/ Max-Age=${this.configService.get('JWT_EXPIRATION_TIME')}`
     }
 
-    public getCookieLogOut() {
+    public getCookieLogOut():string {
         return `Authentication =; HttpOnly; Path=/; Max-Age=0`
     }
 }
