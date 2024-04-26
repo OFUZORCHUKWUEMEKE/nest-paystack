@@ -110,7 +110,7 @@ export class AuthController {
             throw new UnauthorizedException('Wrong authentication code');
         }
 
-        const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(request.user.id, true);
+        const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(request.user.customerId, true);
 
         return accessTokenCookie
     }
