@@ -1,3 +1,4 @@
 export interface TokenPayload {
-    customerId: number
+    customerId: any,
+    isSecondFactorAuthenticated:boolean
 }

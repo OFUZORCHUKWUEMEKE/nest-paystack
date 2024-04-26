@@ -9,3 +9,7 @@ export class LoginDto {
     @IsNotEmpty()
     password: string
 }
+
+export class code {
+    twoFactorAuthenticationCode: string
+}

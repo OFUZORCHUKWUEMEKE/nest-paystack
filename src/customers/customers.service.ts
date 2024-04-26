@@ -56,10 +56,24 @@ export class CustomersService {
         }
     }
 
-    async setTwoFactorAuthenticationSecret(secret: string, userId: number) {
-        // return this.model.update(userId, {npm 
-        //     twoFactorAuthenticationSecret: secret
-        // });
-        return this.model.updateOne({_id:userId},{twoFactorAuthenticationSecret:secret})
+    async getById(id) {
+        try {
+            const customer = await this.repository.findOne({ _id: id })
+            if (!customer) throw new ConflictException("Customer Does not exist")
+            return {
+                success: true,
+                customer
+            }
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
+    }
+
+    async setTwoFactorAuthenticationSecret(secret: string, userId: any) {
+        return this.model.updateOne({ _id: userId }, { twoFactorAuthenticationSecret: secret })
+    }
+
+    async turnOnTwoFactorAuthentication(userId: any) {
+        return this.model.updateOne({ _id: userId }, { twofa: true })
     }
 }

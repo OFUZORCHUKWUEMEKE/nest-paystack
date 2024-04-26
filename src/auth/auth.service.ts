@@ -9,7 +9,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly customerService: CustomersService, private readonly customerRepository: CustomerRepository, private readonly jwtService: JwtService, private readonly configService: ConfigService) {}
+    constructor(private readonly customerService: CustomersService, private readonly customerRepository: CustomerRepository, private readonly jwtService: JwtService, private readonly configService: ConfigService) { }
     async getAuthenticated(email, password) {
         let newpassword = password
         try {
@@ -24,17 +24,24 @@ export class AuthService {
         }
     }
 
-    public async getCookieWithJwtToken(customerId: number) {
+    public async getCookieWithJwtToken(customerId: any) {
         const customer = await this.customerRepository.findOne({ _id: customerId })
         if (!customer) throw new HttpException("Invalid Customer Id", HttpStatus.BAD_REQUEST)
         const payload: TokenPayload = {
             customerId,
+            isSecondFactorAuthenticated: false
         }
         const token = await this.jwtService.sign(payload)
-        return `Authentication=${token}; HttpOnly; , Path/ Max-Age=${this.configService.get('JWT_EXPIRATION_TIME')}`
+        return token
     }
 
-    public getCookieLogOut():string {
+    public getCookieWithJwtAccessToken(userId: any, isSecondFactorAuthenticated = true) {
+        const payload: TokenPayload = { customerId: userId, isSecondFactorAuthenticated };
+        const token = this.jwtService.sign(payload);
+        return token
+    }
+
+    public getCookieLogOut(): string {
         return `Authentication =; HttpOnly; Path=/; Max-Age=0`
     }
 }
