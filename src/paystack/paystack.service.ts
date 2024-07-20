@@ -7,7 +7,6 @@ import { ExternalCall } from 'src/external-call/extrenal-call.service';
 @Injectable()
 export class PaystackService {
     constructor(private readonly apis: ExternalCall, private readonly configService: ConfigService) { }
-
     async createCustomer(customer: PaystackCustomer) {
         const payload = {
             first_name: customer.firstname,
@@ -17,7 +16,6 @@ export class PaystackService {
             metadata: {
                 date_of_birth: customer.date_of_birth
             }
-
         }
         const { result, err } = await this.apis.postData(PAYSTACK_CREATE_CUSTOMER, payload, { Authorization: `Bearer ${this.configService.get('PAYSTACK_SECRET_KEY')}` })
         console.log(err)

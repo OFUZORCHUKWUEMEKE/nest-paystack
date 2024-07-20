@@ -78,20 +78,11 @@ export class AuthController {
     async turnOnTwoFactorAuthentication(
         @Req() request,
         @Res() response: Response
-        // @Body() twoFactorAuthenticationCode: code
     ) {
         const user = await this.customerService.getById(request.user.customerId)
         await this.customerService.turnOnTwoFactorAuthentication(request.user.customerId);
         const { otpauthUrl } = await this._twoFa.generateTwoFactorAuthenticationSecret(user.customer)
         return this._twoFa.pipeQrCodeStream(response, otpauthUrl)
-        // const isCodeValid = this._twoFa.isTwoFactorAuthenticationCodeValid(
-        //     twoFactorAuthenticationCode.twoFactorAuthenticationCode, user.customer
-        // );
-        // console.log(twoFactorAuthenticationCode.twoFactorAuthenticationCode)
-        // if (!isCodeValid) {
-        //     throw new UnauthorizedException('Wrong authentication code');
-        // }
-        // await this.customerService.turnOnTwoFactorAuthentication(request.user.customerId);
     }
 
     @Post('authenticate')
@@ -109,9 +100,7 @@ export class AuthController {
         if (!isCodeValid) {
             throw new UnauthorizedException('Wrong authentication code');
         }
-
         const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(request.user.customerId, true);
-
         return accessTokenCookie
     }
 }

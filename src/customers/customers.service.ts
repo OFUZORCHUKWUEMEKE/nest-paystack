@@ -8,12 +8,19 @@ import { Model } from 'mongoose';
 import { WalletsService } from 'src/wallets/wallets.service';
 import { ICustomerResponse } from './customer.interface';
 import { PaystackService } from 'src/paystack/paystack.service';
+import { CoreService } from 'src/common/core/service.core';
 
 @Injectable()
-export class CustomersService {
-    constructor(private readonly customerFactory: CustomerFactory, private readonly repository: CustomerRepository, @InjectModel(Customer.name) private readonly model: Model<Customer>,
-        private readonly wallet: WalletsService, private readonly paystackSevice: PaystackService
-    ) { }
+export class CustomersService extends CoreService<CustomerRepository> {
+    constructor(
+        private readonly customerFactory: CustomerFactory,
+        private readonly repository: CustomerRepository,
+        @InjectModel(Customer.name) private readonly model: Model<Customer>,
+        private readonly wallet: WalletsService,
+        private readonly paystackSevice: PaystackService
+    ) {
+        super(repository)
+    }
     async CreateCustomer(customer: CustomerDto) {
         try {
             const factory = await this.customerFactory.create(customer)
@@ -26,12 +33,9 @@ export class CustomersService {
                 phonenumber: customer.phonenumber,
                 date_of_birth: new Date()
             }
-            const { result, err } = await this.paystackSevice.createCustomer(payload)
-            console.log(err)
-            if (err) {
-                console.log(err)
-                throw new BadRequestException("An error occured here")
-            }
+            const { result, err } = await this.paystackSevice.createCustomer(payload);
+            if (err) throw new BadRequestException(err);
+
             return {
                 success: true,
                 customer: newCustomer,
@@ -45,7 +49,7 @@ export class CustomersService {
 
     async getEmail(email) {
         try {
-            const customer = await this.repository.findOne({ email })
+            const customer = await this.findOne({ email })
             if (!customer) throw new ConflictException("Customer Does not exist")
             return {
                 success: true,
@@ -58,7 +62,7 @@ export class CustomersService {
 
     async getById(id) {
         try {
-            const customer = await this.repository.findOne({ _id: id })
+            const customer = await this.findOne({ _id: id })
             if (!customer) throw new ConflictException("Customer Does not exist")
             return {
                 success: true,
