@@ -2,13 +2,14 @@ import { BadRequestException, ConflictException, Injectable } from '@nestjs/comm
 import { CustomerDto, PaystackCustomer } from './enum/customer.dto';
 import { CustomerFactory } from './customer.factory';
 import { CustomerRepository } from './customer.repository';
-import { Customer } from './customer.model';
+import { BankDetails, Customer } from './customer.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { WalletsService } from 'src/wallets/wallets.service';
 import { ICustomerResponse } from './customer.interface';
 import { PaystackService } from 'src/paystack/paystack.service';
 import { CoreService } from 'src/common/core/service.core';
+import { TITAN } from './constants';
 
 @Injectable()
 export class CustomersService extends CoreService<CustomerRepository> {
@@ -17,7 +18,8 @@ export class CustomersService extends CoreService<CustomerRepository> {
         private readonly repository: CustomerRepository,
         @InjectModel(Customer.name) private readonly model: Model<Customer>,
         private readonly wallet: WalletsService,
-        private readonly paystackSevice: PaystackService
+        private readonly paystackSevice: PaystackService,
+        @InjectModel(BankDetails.name) private readonly bankModel: Model<BankDetails>
     ) {
         super(repository)
     }
@@ -33,28 +35,42 @@ export class CustomersService extends CoreService<CustomerRepository> {
                 phonenumber: customer.phonenumber,
                 date_of_birth: new Date()
             }
-            const { result, err } = await this.paystackSevice.createCustomer(payload);
-            if (err) throw new BadRequestException(err);
-
+            const paystackCustomer = await this.paystackSevice.createCustomer(payload);
+            const createDedicatedAccount = await this.paystackSevice.createVirtualAccount({
+                customer_id: paystackCustomer.data.customer_code,
+                preferred_bank: TITAN
+            })
+            const newBankDetail = await this.bankModel.create({
+                bankName: createDedicatedAccount?.data?.bank?.name,
+                accountName: createDedicatedAccount?.data.account_name,
+                accountNumber: createDedicatedAccount?.data?.account_number,
+                vehicle_id: newCustomer._id
+            });
+            newCustomer.bankdetails = newBankDetail;
+            await newCustomer.save();
             return {
                 success: true,
                 customer: newCustomer,
-                wallet: newWallet
-            }
+                wallet: newWallet,
+                account_details: {
+                    message: createDedicatedAccount.message,
+                    bank: {
+                        name: createDedicatedAccount?.data?.bank?.name,
+                        account_name: createDedicatedAccount?.data.account_name,
+                        account_number: createDedicatedAccount?.data?.account_number
+                    }
+                }
+            };
         } catch (error) {
-            throw new BadRequestException(error)
+            throw new BadRequestException(error);
         }
-
     }
 
     async getEmail(email) {
         try {
             const customer = await this.findOne({ email })
             if (!customer) throw new ConflictException("Customer Does not exist")
-            return {
-                success: true,
-                customer
-            }
+            return customer;
         } catch (error) {
             throw new BadRequestException(error)
         }

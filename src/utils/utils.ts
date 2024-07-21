@@ -17,3 +17,15 @@ export const HashPassword = async (password: string) => {
 
 export const comparePassword = async (a, b) => await bcrypt.compare(a, b)
 
+export const GenerateRef = function (length: number): string {
+    let result = '';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  
+

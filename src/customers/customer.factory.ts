@@ -8,7 +8,7 @@ import { HashPassword, generateToken } from "src/utils/utils";
 export class CustomerFactory {
     async create(customer: CustomerDto) {
         const hashpassword = await HashPassword(customer.password)
-        const token =  generateToken(15)
+        const token = generateToken(15)
         return {
             ...customer,
             password: hashpassword,

@@ -35,10 +35,10 @@ import {
       return this.entityModel.find(entityFilterQuery, projection, options);
     }
   
-    // async create(createEntityData: unknown): Promise<T> {
-    //   const entity = new this.entityModel(createEntityData);
-    //   return entity.save();
-    // }
+    async create(data) {
+      const document = new this.entityModel(data);
+      return await document.save();
+  }
 
     async createMany(createEntityData: unknown): Promise<T> {
       return this.entityModel.create(createEntityData);

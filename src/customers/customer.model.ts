@@ -5,6 +5,23 @@ import { CustomerType } from "./enum/enum";
 export type CustomerDocument = Customer & Document
 
 @Schema({ timestamps: true })
+export class BankDetails {
+    @Prop({ required: true })
+    bankName: string;
+
+    @Prop({ required: true })
+    accountNumber: string;
+
+    @Prop({ required: true })
+    accountName: string;
+
+    @Prop({ required: true })
+    customer_id: string;
+
+}
+export const BankSchema = SchemaFactory.createForClass(BankDetails);
+
+@Schema({ timestamps: true })
 export class Customer extends Document {
     _id?: any;
 
@@ -37,6 +54,10 @@ export class Customer extends Document {
 
     @Prop({ default: false })
     blacklisted: boolean
+
+    @Prop({required:false,type:BankSchema})
+    bankdetails:BankDetails
 }
 
-export const CustomerSchema = SchemaFactory.createForClass(Customer)
+export const CustomerSchema = SchemaFactory.createForClass(Customer);
+

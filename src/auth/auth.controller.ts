@@ -11,7 +11,7 @@ import { AuthGuard } from './guard/auth.guard';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService, private readonly _twoFa: TwoFactorAuthenticationService) { }
+    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService, private readonly _twoFa: TwoFactorAuthenticationService){}
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/signup")
@@ -45,62 +45,5 @@ export class AuthController {
         } catch (error) {
             throw new HttpException(error, HttpStatus.BAD_REQUEST)
         }
-    }
-
-    @UseGuards(AuthGuard)
-    @Post('logout')
-    async logOut(@Req() request, @Res() response: Response) {
-        response.setHeader('Set-Cookie', this.authService.getCookieLogOut());
-        return response.sendStatus(200);
-    }
-
-    // @UseGuards(JwtAuthenticationGuard)
-    @UseGuards(AuthGuard)
-    @Get()
-    authenticated(@Req() request) {
-        const user = request.user;
-        user.password = undefined;
-        return user;
-    }
-
-    @UseGuards(AuthGuard)
-    @Post('2fa/generate')
-    async generate(@Res() response: Response, @Req() req) {
-        const user = await this.customerService.getById(req.user.customerId)
-        const { otpauthUrl } = await this._twoFa.generateTwoFactorAuthenticationSecret(user.customer)
-        return this._twoFa.pipeQrCodeStream(response, otpauthUrl)
-    }
-
-
-    @Get('turn-on')
-    @HttpCode(200)
-    @UseGuards(AuthGuard)
-    async turnOnTwoFactorAuthentication(
-        @Req() request,
-        @Res() response: Response
-    ) {
-        const user = await this.customerService.getById(request.user.customerId)
-        await this.customerService.turnOnTwoFactorAuthentication(request.user.customerId);
-        const { otpauthUrl } = await this._twoFa.generateTwoFactorAuthenticationSecret(user.customer)
-        return this._twoFa.pipeQrCodeStream(response, otpauthUrl)
-    }
-
-    @Post('authenticate')
-    @HttpCode(200)
-    @UseGuards(AuthGuard)
-    async authenticate(
-        @Req() request,
-        @Body() { twoFactorAuthenticationCode }: code
-    ) {
-        console.log(request.user)
-        const user = await this.customerService.getById(request.user.customerId)
-        const isCodeValid = this._twoFa.isTwoFactorAuthenticationCodeValid(
-            twoFactorAuthenticationCode, user.customer
-        );
-        if (!isCodeValid) {
-            throw new UnauthorizedException('Wrong authentication code');
-        }
-        const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(request.user.customerId, true);
-        return accessTokenCookie
     }
 }

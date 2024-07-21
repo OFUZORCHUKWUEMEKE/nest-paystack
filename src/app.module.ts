@@ -13,6 +13,7 @@ import { PaystackModule } from './paystack/paystack.module';
 import configuration from './config/config';
 import Joi from 'joi';
 import { JwtModule } from '@nestjs/jwt';
+import { WebhooksModule } from './webhooks/webhooks.module';
 
 const config = configuration()
 
@@ -46,7 +47,7 @@ const config = configuration()
       }
     }),
     global: true
-  }), PaystackModule],
+  }), PaystackModule, WebhooksModule],
   controllers: [AppController, TransactionsController],
   providers: [AppService],
 })
