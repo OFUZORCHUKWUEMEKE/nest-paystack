@@ -50,9 +50,5 @@ Check npm version
 
 
 
-- Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
+- LinkedIn - [Connect LinkedIn](https://www.linkedin.com/in/ofuzor-chukwuemeke-648186204/)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
