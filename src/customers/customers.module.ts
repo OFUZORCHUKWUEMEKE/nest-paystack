@@ -9,9 +9,9 @@ import { WalletsModule } from 'src/wallets/wallets.module';
 import { PaystackModule } from 'src/paystack/paystack.module';
 
 @Module({
-  imports: [forwardRef(()=>WalletsModule),MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }, { name: BankDetails.name, schema: BankSchema }]), PaystackModule],
+  imports: [forwardRef(() => WalletsModule), MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }, { name: BankDetails.name, schema: BankSchema }]), PaystackModule],
   controllers: [CustomersController],
   providers: [CustomersService, CustomerFactory, CustomerRepository],
   exports: [CustomerFactory, CustomerRepository, CustomersService]
 })
-export class CustomersModule {}
+export class CustomersModule { }
