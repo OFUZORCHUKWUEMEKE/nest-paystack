@@ -34,7 +34,7 @@ export class WebhooksService {
                     { user_id: customer._id },
                     { $inc: { amount: +(data?.amount) } },
                     { session });
-                    await updateWallet.save({ session });
+                await updateWallet.save({ session });
                 const transaction = await this.transactionService.createTransaction({
                     amount: Number(data.amount / 100),
                     customername: customer.firstname,

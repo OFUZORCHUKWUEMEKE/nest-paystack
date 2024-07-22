@@ -10,6 +10,7 @@ export class TransactionsController extends CoreController {
     constructor(private readonly transactionService: TransactionsService) {
         super()
     }
+
     @UseGuards(AuthGuard)
     async getTransaction(
         @Query() query: ViewTransactionDto,

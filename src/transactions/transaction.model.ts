@@ -19,8 +19,17 @@ export class Transaction extends Document {
     @Prop({ type: String, required: false })
     customer_code: string
 
-    @Prop({ enum: TransactionType })
+    @Prop({ type: String, required: false })
+    customer_name: string
+
+    @Prop({ type: String, required: false })
+    reference: string
+
+    @Prop({ enum: TransactionType, required: false })
     transaction_type: TransactionType
+
+    @Prop({ type: String, required: false })
+    description: string
 }
 
 

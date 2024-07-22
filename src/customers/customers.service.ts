@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CustomerDto, PaystackCustomer } from './enum/customer.dto';
 import { CustomerFactory } from './customer.factory';
 import { CustomerRepository } from './customer.repository';

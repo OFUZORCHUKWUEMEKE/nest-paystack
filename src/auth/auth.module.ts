@@ -12,6 +12,7 @@ import { JwtTwoFactorStrategy } from './strategies/two-fa.strategy';
 @Module({
   imports: [CustomersModule,PassportModule],
   controllers: [AuthController],
-  providers: [AuthService,LocalStrategy,JwtStrategy,TwoFactorAuthenticationService,AuthGuard,JwtTwoFactorStrategy]
+  providers: [AuthService,LocalStrategy,JwtStrategy,TwoFactorAuthenticationService,JwtTwoFactorStrategy],
+  exports:[AuthService]
 })
 export class AuthModule {}

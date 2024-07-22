@@ -1,4 +1,6 @@
 
-export class WalletDto{
-    
+export interface WalletTransferDto{
+     amount:number
+     description:string,
+     email
 }

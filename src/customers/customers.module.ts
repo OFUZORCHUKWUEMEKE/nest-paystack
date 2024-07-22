@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CustomersController } from './customers.controller';
 import { CustomersService } from './customers.service';
 import { CustomerFactory } from './customer.factory';
@@ -9,9 +9,9 @@ import { WalletsModule } from 'src/wallets/wallets.module';
 import { PaystackModule } from 'src/paystack/paystack.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }, { name: BankDetails.name, schema: BankSchema }]), WalletsModule, PaystackModule],
+  imports: [forwardRef(()=>WalletsModule),MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }, { name: BankDetails.name, schema: BankSchema }]), PaystackModule],
   controllers: [CustomersController],
   providers: [CustomersService, CustomerFactory, CustomerRepository],
   exports: [CustomerFactory, CustomerRepository, CustomersService]
 })
-export class CustomersModule { }
+export class CustomersModule {}
