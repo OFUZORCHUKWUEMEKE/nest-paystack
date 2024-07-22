@@ -1,4 +1,4 @@
-import { Controller, HttpStatus, Query, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Query, Res, UseGuards } from '@nestjs/common';
 import { CoreController } from 'src/common/core/controller.core';
 import { TransactionsService } from './transactions.service';
 import { ViewTransactionDto } from './transaction.interface';
@@ -12,6 +12,7 @@ export class TransactionsController extends CoreController {
     }
 
     @UseGuards(AuthGuard)
+    @Get("/")
     async getTransaction(
         @Query() query: ViewTransactionDto,
         @Res({ passthrough: true }) res: Response) {

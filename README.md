@@ -35,17 +35,20 @@ Check npm version
    npm -v
 ```
 
-| Method       | Description              | Endpoints                     |
-|--------------|--------------------------|-------------------------------|
-| POST         | Signup                   | /api/signup                   |
-| POST         | Login                    | /api/login                    |
-| POST         | Create Customer          | /api/customers                |
-| POST         | Create Paystack Customer | /api/paystack                 |
-| GET          | Fetch Bank List          | /api/bank-list                |
-| GET          | Resolve Bank Account     | /api/resolve-account-number   |
-| POST         | Create Beneficiary       | /api/transfer-recipient       |
-| POST         | Bank Transfer            | /api/transfer                 |
-| POST         | Resolve Bank Account     | /api/resolve-account-number   |
+| Method       | Description              | Endpoints                              |
+|--------------|--------------------------|----------------------------------------|
+| POST         | Signup                   | /api/signup                            |
+| POST         | Login                    | /api/login                             |
+| POST         | Create Customer          | /api/customers                         |
+| POST         | Create Paystack Customer | /api/paystack                          |
+| GET          | Fetch Bank List          | /api/paystack/bank-list                |
+| GET          | Resolve Bank Account     | /api/paystack/resolve-account-number   |
+| POST         | Create Beneficiary       | /api/paystack/transfer-recipient       |
+| POST         | Bank Transfer            | /api/paystack/transfer                 |
+| POST         | Wallet Transfer          | /api/wallets/transfer                  |
+| GET          | Get Transactions         | /api/transactions                      |
+
+
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
