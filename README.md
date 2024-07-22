@@ -57,6 +57,13 @@ Install Packages
    TRANSFER_RECIPIENT_ENDPOINT="https://api.paystack.co/transferrecipient"
 ```
 
+#### Spin up Backend Server
+```typescript
+     npm run start:dev 
+```
+
+
+
 | Method       | Description              | Endpoints                              |
 |--------------|--------------------------|----------------------------------------|
 | POST         | Signup                   | /api/signup                            |
@@ -69,6 +76,7 @@ Install Packages
 | POST         | Bank Transfer            | /api/paystack/transfer                 |
 | POST         | Wallet Transfer          | /api/wallets/transfer                  |
 | GET          | Get Transactions         | /api/transactions                      |
+| POST         | Webhook Events           | /api/webhook                           |
 
 
 
