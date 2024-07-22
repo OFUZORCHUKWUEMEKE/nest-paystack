@@ -35,11 +35,14 @@ Check npm version
    npm -v
 ```
 
-| Method       | Description  | Endpoints    |
-|------------- |--------------|--------------|
-| POST         | Signup       | /api/signup
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
-| Row 3, Col 1 | Row 3, Col 2 | Row 3, Col 3 |
+| Method       | Description              | Endpoints                     |
+|--------------|--------------------------|-------------------------------|
+| POST         | Signup                   | /api/signup                   |
+| POST         | Login                    | /api/login                    |
+| POST         | Create Customer          | /api/customers                |
+| POST         | Create Paystack Customer | /api/paystack                 |
+| GET          | Fetch Bank List          | /api/bank-list                |
+| POST         | Resolve Bank Account     | /api/resolve-account-number   |
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
