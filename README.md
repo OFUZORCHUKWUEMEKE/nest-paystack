@@ -5,14 +5,32 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">Built with <a href="http://nestjs.com" target="_blank">Nestjs</a>and  <a href="http://paystack.com" target="_blank">Paystack</a></p>
+  <p align="center">Built with <a href="http://nestjs.com" target="_blank">Nestjs </a>and  <a href="http://paystack.com" target="_blank">Paystack</a></p>
 
    
 
-## Support
+##Introduction
+This is an API that allows users to carry out basic wallet transactions. You can view the live API here.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+This api was developed using
 
+NodeJs (LTS version 21.5.0)
+Nestjs
+Mongoose 
+MongoDB
+
+The tools listed below are needed to run this application to run effectively:
+
+Node (LTS Version)
+Nest (LTS Version)
+
+You can check the Node.js and npm versions by running the following commands.
+
+Check node.js version
+node -v
+
+Check npm version
+npm -v
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
