@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">Built with nest and  <a href="http://paystack.com" target="_blank">Paystack</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">Built with <a href="http://nestjs.com" target="_blank">Nestjs</a>and  <a href="http://paystack.com" target="_blank">Paystack</a></p>
 
    
 
