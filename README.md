@@ -14,10 +14,10 @@ This is an API that allows users to carry out basic wallet transactions. You can
 
 This api was developed using
 
-NodeJs (LTS version 21.5.0)
-Nestjs
-Mongoose 
-MongoDB
+*NodeJs (LTS version 21.5.0)
+*Nestjs
+*Mongoose 
+*MongoDB
 
 The tools listed below are needed to run this application to run effectively:
 
