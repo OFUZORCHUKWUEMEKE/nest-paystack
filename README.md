@@ -42,6 +42,9 @@ Check npm version
 | POST         | Create Customer          | /api/customers                |
 | POST         | Create Paystack Customer | /api/paystack                 |
 | GET          | Fetch Bank List          | /api/bank-list                |
+| GET          | Resolve Bank Account     | /api/resolve-account-number   |
+| POST         | Create Beneficiary       | /api/transfer-recipient       |
+| POST         | Bank Transfer            | /api/transfer                 |
 | POST         | Resolve Bank Account     | /api/resolve-account-number   |
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
