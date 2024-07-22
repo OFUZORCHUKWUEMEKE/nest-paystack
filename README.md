@@ -34,6 +34,28 @@ Check npm version
 ```typescript
    npm -v
 ```
+Install Packages 
+```typescript
+    npm install
+```
+#### Set up env file
+```typescript
+   touch .env 
+  
+  // Create the following
+   PORT=
+   MONGO_URL=
+   PAYSTACK_SECRET_KEY=
+   PAYSTACK_LIVE_PUB_KEY=
+   JWT_SECRET=   
+   JWT_EXPIRATION_TIME=
+   TWO_FACTOR_AUTHENTICATION_APP_NAME=
+   INITIATE_CHARGE=https://api.paystack.co/charge
+   CREATE_CUSTOMER=https://api.paystack.co/customer
+   CREATE_DEDICATED_ACCOUNT= https://api.paystack.co/dedicated_account
+   TRANSFER_ENDPOINT="https://api.paystack.co/transfer"
+   TRANSFER_RECIPIENT_ENDPOINT="https://api.paystack.co/transferrecipient"
+```
 
 | Method       | Description              | Endpoints                              |
 |--------------|--------------------------|----------------------------------------|
@@ -50,5 +72,5 @@ Check npm version
 
 
 
-- LinkedIn - [Connect LinkedIn](https://www.linkedin.com/in/ofuzor-chukwuemeke-648186204/)
+- LinkedIn - [Connect on LinkedIn](https://www.linkedin.com/in/ofuzor-chukwuemeke-648186204/)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
