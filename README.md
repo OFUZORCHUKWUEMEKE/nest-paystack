@@ -10,7 +10,7 @@
    
 
 ## Introduction
-This is an API that allows users to carry out basic wallet transactions. You can view the live API here.
+A NestJS API that incorporates Paystack payment processing and includes wallet functionality
 
 This api was developed using
 
@@ -34,6 +34,12 @@ Check npm version
 ```typescript
    npm -v
 ```
+
+| Method       | Description  | Endpoints    |
+|------------- |--------------|--------------|
+| POST         | Signup       | /api/signup
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+| Row 3, Col 1 | Row 3, Col 2 | Row 3, Col 3 |
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
