@@ -27,10 +27,13 @@ Nest (LTS Version)
 You can check the Node.js and npm versions by running the following commands.
 
 Check node.js version
-node -v
-
+```typescript
+   node -v
+```
 Check npm version
-npm -v
+```typescript
+   npm -v
+```
 
 - Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
 - Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
