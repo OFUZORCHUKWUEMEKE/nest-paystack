@@ -9,7 +9,7 @@
 
    
 
-##Introduction
+## Introduction
 This is an API that allows users to carry out basic wallet transactions. You can view the live API here.
 
 This api was developed using
