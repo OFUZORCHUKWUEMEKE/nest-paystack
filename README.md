@@ -6,17 +6,16 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://paystack.com" target="_blank">Paystack</a> framework for building efficient and scalable server-side applications.</p>
+
    
 
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Website - [https://chukwuemeke.netlify.app](https://chukwuemeke.netlify.app)
+- Twitter - [@OfuzorEmeke](https://twitter.com/OfuzorEmeke)
 
 ## License
 
