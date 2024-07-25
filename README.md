@@ -56,9 +56,9 @@ Install Packages
    TRANSFER_ENDPOINT="https://api.paystack.co/transfer"
    TRANSFER_RECIPIENT_ENDPOINT="https://api.paystack.co/transferrecipient"
 ```
-
-#### Setup Webhook on your paystack dashboard to point to ${URL}/api/webhooks
-
+```typescript
+   Setup Webhook on your paystack dashboard to point to ${URL}/api/webhooks
+```
 #### Spin up Backend Server
 ```typescript
      npm run start:dev 
