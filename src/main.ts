@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(process.env.PORT);
 
-  app.setGlobalPrefix("/api")
+  app.setGlobalPrefix("/api");
 
   // const { httpAdapter } = app.get(HttpAdapterHost);
   app.use(cookieParser())
@@ -23,7 +23,7 @@ async function bootstrap() {
   .setTitle('Nestjs Paystack Integration')
   .setDescription('Paystack Integration with nestjs with a wallet feature')
   .setVersion('1.0')
-  .addTag('Haulage API')
+  .addTag('NEST PAYSTACK API')
   .build();
 
 
