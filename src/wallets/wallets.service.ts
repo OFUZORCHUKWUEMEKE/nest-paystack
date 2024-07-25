@@ -35,13 +35,15 @@ export class WalletsService extends CoreService<WalletRepository> {
         const senderAccount = await this.customer.findOne({ email: data.email });
         if (!sender) throw new UnauthorizedException()
         const reciepient = await this.customer.findOne({ email: data.email });
+        const reciepientAccount = await this.model.model().findOne({ user_id: reciepient._id })
         if (!reciepient) throw new ConflictException("Customer does not exist,wrong email address");
         if (sender && reciepient) {
             const session = await this.model.model().startSession();
             try {
                 session.startTransaction();
-                await sender.updateOne({ $inc: { amount: -(data?.amount) } }, { session })
-                await reciepient.updateOne({ $inc: { amount: +(data.amount) } }, { session })
+                if (sender.balance < data.amount) throw new ConflictException("Insufficient Funds. Please fund your wallets");
+                await sender.updateOne({ $inc: { balance: -(data?.amount) } }, { session });
+                await reciepient.updateOne({ $inc: { balance: +(data.amount) } }, { session });
                 await session.commitTransaction();
 
                 const reciepientTransaction = await this.transaction.createTransaction({
@@ -51,7 +53,7 @@ export class WalletsService extends CoreService<WalletRepository> {
                     reference: GenerateRef(10),
                     transactiontype: TransactionType.TRANSFER,
                     status: TransactionStatus.SUCCESS
-                })
+                });
 
                 const senderTransaction = await this.transaction.createTransaction({
                     customerid: senderAccount._id,
@@ -60,7 +62,7 @@ export class WalletsService extends CoreService<WalletRepository> {
                     reference: GenerateRef(10),
                     transactiontype: TransactionType.TRANSFER,
                     status: TransactionStatus.SUCCESS
-                })
+                });
                 return {
                     senderTransaction
                 }
@@ -69,8 +71,8 @@ export class WalletsService extends CoreService<WalletRepository> {
                 await session.abortTransaction();
                 throw new BadRequestException('Something went wrong!');
             } finally {
-                session.endSession()
-                console.log("Session Ended")
+                session.endSession();
+                console.log("Session Ended");
             }
         }
     }

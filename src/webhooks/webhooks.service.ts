@@ -32,7 +32,7 @@ export class WebhooksService {
             try {
                 const updateWallet = await this.walletRepository.findOneAndUpdate(
                     { user_id: customer._id },
-                    { $inc: { amount: +(data?.amount) } },
+                    { $inc: { balance: +(data?.amount) } },
                     { session });
                 await updateWallet.save({ session });
                 const transaction = await this.transactionService.createTransaction({
