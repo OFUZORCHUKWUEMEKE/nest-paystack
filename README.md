@@ -57,6 +57,19 @@ Install Packages
    TRANSFER_RECIPIENT_ENDPOINT="https://api.paystack.co/transferrecipient"
 ```
 ```typescript
+   // set up Dedicated Nuban in your Paystack Integration contact support@paystack.com
+      data: {
+    status: false,
+    message: 'Dedicated NUBAN is not available for your business',
+    meta: {
+      nextStep: 'You can send us an email at support@paystack.com to make a request for the service'
+    },
+    type: 'api_error',
+    code: 'feature_unavailable'
+  }
+```
+
+```typescript
    Setup Webhook on your paystack dashboard to point to ${URL}/api/webhooks
 ```
 #### Spin up Backend Server

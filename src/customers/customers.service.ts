@@ -36,6 +36,7 @@ export class CustomersService extends CoreService<CustomerRepository> {
                 date_of_birth: new Date()
             }
             const paystackCustomer = await this.paystackSevice.createCustomer(payload);
+            console.log(paystackCustomer)
             const createDedicatedAccount = await this.paystackSevice.createVirtualAccount({
                 customer_id: paystackCustomer.data.customer_code,
                 preferred_bank: TITAN
@@ -50,7 +51,7 @@ export class CustomersService extends CoreService<CustomerRepository> {
             await newCustomer.save();
             return {
                 success: true,
-                customer: newCustomer,
+                customer: paystackCustomer,
                 wallet: newWallet,
                 account_details: {
                     message: createDedicatedAccount.message,
