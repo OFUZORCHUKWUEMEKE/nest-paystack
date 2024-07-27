@@ -8,17 +8,20 @@ import { Response } from 'express';
 import JwtAuthenticationGuard from './guard/jwtAuthentication.guard';
 import { TwoFactorAuthenticationService } from './strategies/twoFactorAuthentication.service';
 import { AuthGuard } from './guard/auth.guard';
+import { CoreController } from '../common/core/controller.core';
 
 @Controller('auth')
-export class AuthController {
-    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService, private readonly _twoFa: TwoFactorAuthenticationService){}
+export class AuthController extends CoreController {
+    constructor(private readonly customerService: CustomersService, private readonly authService: AuthService, private readonly _twoFa: TwoFactorAuthenticationService) {
+        super()
+    }
 
     @HttpCode(HttpStatus.CREATED)
     @Post("/signup")
-    async Signup(@Body() customer: CustomerDto) {
+    async Signup(@Body() customer: CustomerDto, @Res() res: Response) {
         try {
             const newCustomer = await this.customerService.CreateCustomer(customer)
-            return newCustomer;
+            return this.responseSuccess(res, "00", "Success", newCustomer, HttpStatus.OK)
         } catch (error) {
             throw new BadRequestException(error)
         }
@@ -27,7 +30,7 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     @UseGuards(LocalAuthenticationGuard)
     @Post("/login")
-    async Login(@Req() request, @Res() response: Response) {
+    async Login(@Req() request, @Res() res: Response) {
         try {
             const user = request.user
             const customer = await this.customerService.getById(user._doc._id)
@@ -38,10 +41,7 @@ export class AuthController {
             user.password = undefined;
 
             const { password, ...others } = user._doc
-            response.send({
-                ...others,
-                token
-            })
+            return this.responseSuccess(res, "00", "Success", others, HttpStatus.OK);
         } catch (error) {
             throw new HttpException(error, HttpStatus.BAD_REQUEST)
         }

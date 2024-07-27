@@ -10,28 +10,29 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT);
 
   app.setGlobalPrefix("/api");
-
   // const { httpAdapter } = app.get(HttpAdapterHost);
-  app.use(cookieParser())
+  // app.use(cookieParser())
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+  }))
 
   app.useGlobalFilters(new HttpExceptionFilter(), new ModelExceptionFilter());
 
   const config = new DocumentBuilder()
-  .setTitle('Nestjs Paystack Integration')
-  .setDescription('Paystack Integration with nestjs with a wallet feature')
-  .setVersion('1.0')
-  .addTag('NEST PAYSTACK API')
-  .build();
+    .setTitle('Nestjs Paystack Integration')
+    .setDescription('Paystack Integration with nestjs with a wallet feature')
+    .setVersion('1.0')
+    .addTag('NEST PAYSTACK API')   
+    .build();
 
 
-const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-  }))
+  await app.listen(process.env.PORT);
+
+
 }
 bootstrap();
