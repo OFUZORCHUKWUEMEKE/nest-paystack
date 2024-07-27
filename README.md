@@ -57,7 +57,7 @@ Install Packages
    TRANSFER_RECIPIENT_ENDPOINT="https://api.paystack.co/transferrecipient"
 ```
 ```typescript
-   // set up Dedicated Nuban in your Paystack Integration contact support@paystack.com
+   // set up Dedicated Nuban in your Paystack Integration contact support@paystack.com for creation of Virtual Account
       data: {
     status: false,
     message: 'Dedicated NUBAN is not available for your business',
